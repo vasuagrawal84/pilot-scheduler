@@ -1,7 +1,3 @@
-/**
- * Seed controller for fill your db of fake data
- */
-
 import HTTPStatus from 'http-status';
 
 import Pilot from '../models/pilot.model';

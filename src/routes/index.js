@@ -18,9 +18,7 @@ const isTest = process.env.NODE_ENV === 'test';
 routes.use('/pilot', PilotRoutes);
 routes.use('/booking', BookingRoutes);
 
-if (isDev || isTest) {
-  routes.use('/seeds', SeedRoutes);
-}
+routes.use('/seeds', SeedRoutes);
 
 routes.all('*', (req, res, next) =>
   next(new APIError('Not Found!', HTTPStatus.NOT_FOUND, true)),

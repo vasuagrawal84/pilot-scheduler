@@ -62,11 +62,12 @@ PilotSchema.statics = {
     return this.update({ pilotId }, { $push: { Bookings: bookingId } }, { multi: false })
   },
 
-  getPilotsForBase(location, excludePilodIds) {
+  getPilotsForBase(location, excludePilodIds, dayOfWeek) {
     return this.find(
       {
         Base: location,
-        _id: { $nin: excludePilodIds }
+        _id: { $nin: excludePilodIds },
+        WorkDays: dayOfWeek
       }
     )
       .sort({ updatedAt: 1 })

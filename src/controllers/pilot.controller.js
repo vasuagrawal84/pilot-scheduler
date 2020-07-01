@@ -37,12 +37,13 @@ export const getAvailability = async (req, res, next) => {
   const { location, depDateTime, returnDateTime } = req.query;
 
   try {
-    // const timeNow = moment().unix();
+    const timeNow = moment().unix();
     const departureTimestamp = moment(depDateTime).unix();
     const returnTimestamp = moment(returnDateTime).unix();
-    // if (departureTimestamp < timeNow || returnTimestamp < timeNow) {
-    //   throw Error('Availability checks must be for the future')
-    // }
+
+    if (departureTimestamp < timeNow || returnTimestamp < timeNow) {
+      throw Error('Availability checks must be for the future')
+    }
 
     const bookingsList = await Booking.getBookingsBetweenAt(location, departureTimestamp, returnTimestamp);
 
@@ -50,7 +51,9 @@ export const getAvailability = async (req, res, next) => {
       return booking.pilot;
     });
 
-    const pilotsList = await Pilot.getPilotsForBase(location, bookedPilotIds);
+    const weekdayOfFlight = moment(depDateTime).format('dddd');
+    console.warn('!!', weekdayOfFlight)
+    const pilotsList = await Pilot.getPilotsForBase(location, bookedPilotIds, weekdayOfFlight);
 
     return res.status(HTTPStatus.OK).send({
       pilotId: pilotsList[0]

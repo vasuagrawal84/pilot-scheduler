@@ -1,0 +1,83 @@
+{
+  "name": "pilot-scheduler",
+  "description": "Pilot Scheduling System",
+  "version": "1.0.0",
+  "author": "Vasu Agrawal",
+  "engines": {
+    "node": ">= 6.10",
+    "npm": ">= 3.10",
+    "yarn": ">=0.20.3"
+  },
+  "main": "./src/index.js",
+  "lint-staged": {
+    "src/**/*.js": [
+      "yarn prettier",
+      "git add"
+    ]
+  },
+  "scripts": {
+    "build": "nps build",
+    "start": "nps",
+    "test": "nps test",
+    "test:watch": "nps test.watch",
+    "dev": "nps dev",
+    "dev:debug": "nps dev.debug",
+    "prettier": "prettier --write '{src,__{tests,mocks}__}/**/*.js'",
+    "precommit": "nps lintStaged && nps validate",
+    "db:seeds-pilot": "nps db.seedsPilot",
+    "db:seeds-clear": "nps db.seedsClearPilot",
+    "db:seeds-clear-pilot": "nps db.seedsClear",
+    "lint": "nps lint",
+    "lint:fix": "nps lint.fix",
+    "doc": "nps doc"
+  },
+  "devDependencies": {
+    "apidoc": "^0.17.5",
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-register": "^6.26.0",
+    "chai": "^4.1.1",
+    "eslint": "^4.5.0",
+    "eslint-config-prettier": "^2.3.0",
+    "faker": "^4.1.0",
+    "lint-staged": "^8.0.0",
+    "mocha": "^5.0.2",
+    "morgan": "^1.8.1",
+    "nodemon": "^2.0.0",
+    "nps": "^5.7.1",
+    "nps-utils": "^1.3.0",
+    "prettier": "^1.6.1",
+    "source-list-map": "2.0.0",
+    "superagent": "^3.6.0",
+    "webpack": "^4.0.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-node-externals": "^1.6.0",
+    "webpack-sources": "1.0.2"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "chalk": "^3.0.0",
+    "compression": "^1.7.0",
+    "cors": "^2.8.4",
+    "dotenv": "^5.0.0",
+    "express": "^4.15.4",
+    "express-status-monitor": "^1.0.0",
+    "express-validation": "^1.0.2",
+    "express-winston": "^2.4.0",
+    "helmet": "^3.8.1",
+    "http-status": "^1.0.1",
+    "joi": "^13.0.1",
+    "jsonwebtoken": "^8.0.0",
+    "method-override": "^2.3.8",
+    "moment": "^2.27.0",
+    "mongoose": "^5.0.0",
+    "mongoose-unique-validator": "^2.0.0",
+    "pm2": "^2.6.1",
+    "pretty-error": "^2.1.1",
+    "slug": "^0.9.1",
+    "winston": "^2.3.1"
+  }
+}

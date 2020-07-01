@@ -1,0 +1,10 @@
+{
+  "name": "Pilot Scheduler",
+  "version": "0.0.1",
+  "description": "Api docs of Pilot Scheduler",
+  "title": "Pilot Scheduler",
+  "url" : "http://localhost:3000/api",
+  "template": {
+    "forceLanguage": "en"
+  }
+}

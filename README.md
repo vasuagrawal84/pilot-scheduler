@@ -68,9 +68,9 @@ For seed just run one of these following comands
 
 *You can change the number of seed by changing the number in each script inside `/scripts/seeds`*
 
-- Seeds 10 pilot `yarn db:seeds-pilot`
+- Seeds pilots in the Crew.json `yarn db:seeds-pilot`
 - Clear pilot collection `yarn db:seeds-clear-pilot`
-- Clear all collection `yarn db:seeds-clear`
+- Clear all collections `yarn db:seeds-clear`
 
 ---
 

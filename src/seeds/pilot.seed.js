@@ -3,7 +3,7 @@ import pilotsJson from './Crew.json'
 
 import Pilot from '../models/pilot.model';
 
-export async function pilotSeed(count) {
+export async function pilotSeed() {
   const crew = pilotsJson.Crew;
 
   return await Pilot.insertMany(crew);

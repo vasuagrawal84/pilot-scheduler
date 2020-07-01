@@ -59,7 +59,7 @@ PilotSchema.statics = {
   },
 
   addBooking(pilotId, bookingId) {
-    return this.update({ pilotId }, { $push: { Bookings: bookingId } }, { multi: false })
+    return this.update({ _id: pilotId }, { $push: { Bookings: bookingId } }, { multi: false })
   },
 
   getPilotsForBase(location, excludePilodIds, dayOfWeek) {

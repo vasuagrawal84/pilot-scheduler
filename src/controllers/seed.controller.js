@@ -6,11 +6,11 @@ import { pilotSeed, deletePilotSeed } from '../seeds/pilot.seed';
 
 export async function seedPilots(req, res, next) {
   try {
-    await pilotSeed(req.params.count);
+    await pilotSeed();
 
     return res
       .status(HTTPStatus.OK)
-      .send(`Pilot seed success! Created ${req.params.count || 10} pilots!`);
+      .send(`Pilot seed success! Created pilots!`);
   } catch (e) {
     e.status = HTTPStatus.BAD_REQUEST;
     return next(e);

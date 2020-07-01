@@ -25,8 +25,8 @@
     "prettier": "prettier --write '{src,__{tests,mocks}__}/**/*.js'",
     "precommit": "nps lintStaged && nps validate",
     "db:seeds-pilot": "nps db.seedsPilot",
-    "db:seeds-clear": "nps db.seedsClearPilot",
-    "db:seeds-clear-pilot": "nps db.seedsClear",
+    "db:seeds-clear": "nps db.seedsClear",
+    "db:seeds-clear-pilot": "nps db.seedsClearPilot",
     "lint": "nps lint",
     "lint:fix": "nps lint.fix",
     "doc": "nps doc"

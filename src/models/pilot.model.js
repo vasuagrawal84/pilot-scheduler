@@ -3,8 +3,6 @@
 import mongoose, { Schema } from 'mongoose';
 import uniqueValidator from 'mongoose-unique-validator';
 
-import constants from '../config/constants';
-
 const PilotSchema = new Schema(
   {
     ID: {

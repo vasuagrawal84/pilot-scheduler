@@ -9,7 +9,8 @@ jest.mock('../../src/models/pilot.model', () => ({
 }));
 
 jest.mock('../../src/models/booking.model', () => ({
-    createBooking: jest.fn()
+    createBooking: jest.fn(),
+    isAlreadyBooked: jest.fn()
 }));
 
 const mockReq = {
@@ -20,18 +21,24 @@ const mockReq = {
     }
 };
 
+const mockPilot = {
+    _id: 'testId',
+    WorkDays: ['Monday', 'Friday', 'Sunday']
+};
+
 describe('Booking Controller', () => {
     let returnJsonMockFn;
     describe('create', () => {
         it('should create a booking with the correct ID and epoch timestamps', async () => {
             returnJsonMockFn = jest.fn();
 
-            Pilot.findOne.mockImplementation((params) => (params.ID === 'testPilotId' ? 'mockPilot' : 'fail'));
+            Pilot.findOne.mockImplementation((params) => (params.ID === 'testPilotId' ? mockPilot : 'fail'));
             Booking.createBooking.mockImplementation((pilot, departTimestamp, returnTimestamp) => {
-                if (pilot === 'mockPilot' && departTimestamp === 1621152000 && returnTimestamp === 1621162800) {
+                if (pilot === mockPilot && departTimestamp === 1621152000 && returnTimestamp === 1621162800) {
                     return Promise.resolve({ mockBooking: 'mockBookingData' });
                 }
             });
+            Booking.isAlreadyBooked.mockReturnValue(Promise.resolve(false));
 
             const res = {
                 status: () => ({
@@ -59,11 +66,35 @@ describe('Booking Controller', () => {
             expect(returnedError.message).toBe('mockPilotError');
         });
 
-        it('should return an error when there is an error from the Booking model call', async () => {
+        it('should return an error when there is an error from the Booking isAlreadyBooked model call', async () => {
             returnJsonMockFn = jest.fn();
-            
-            Pilot.findOne.mockImplementation((params) => (params.ID === 'testPilotId' ? 'mockPilot' : 'fail'));
-            Booking.createBooking.mockImplementation(() => { throw new Error('mockBookingError')});
+
+            Pilot.findOne.mockImplementation((params) => (params.ID === 'testPilotId' ? mockPilot : 'fail'));
+            Booking.isAlreadyBooked.mockImplementation(() => { throw new Error('mockAvailibilityError') });
+
+            const mockRes = {
+                status: () => ({
+                    json: returnJsonMockFn
+                })
+            };
+
+            let returnedError;
+            const next = jest.fn(err => {
+                returnedError = err;
+            });
+
+            await create(mockReq, mockRes, next);
+
+            expect(returnedError.status).toBe(HTTPStatus.BAD_REQUEST);
+            expect(returnedError.message).toBe('mockAvailibilityError');
+        });
+
+        it('should return an error when there is an error from the createBooking model call', async () => {
+            returnJsonMockFn = jest.fn();
+
+            Pilot.findOne.mockImplementation((params) => (params.ID === 'testPilotId' ? mockPilot : 'fail'));
+            Booking.createBooking.mockImplementation(() => { throw new Error('mockBookingError') });
+            Booking.isAlreadyBooked.mockReturnValue(Promise.resolve(false));
 
             const mockRes = {
                 status: () => ({

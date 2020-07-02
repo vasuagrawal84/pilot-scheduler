@@ -12,6 +12,15 @@ export async function create(req, res, next) {
     const returnTimestamp = moment(returnDateTime).unix();
 
     const pilot = await Pilot.findOne({ ID: pilotId });
+    const isAlreadyBooked = await Booking.isAlreadyBooked(pilot, departTimestamp, returnTimestamp);
+
+    const weekdayOfFlight = moment(depDateTime).format('dddd');
+    const isPilotWorking = pilot.WorkDays.includes(weekdayOfFlight);
+
+    if (isAlreadyBooked || !isPilotWorking) {
+      throw new Error('Pilot is not available at the given time');
+    }
+
     return res
       .status(HTTPStatus.CREATED)
       .json(await Booking.createBooking(pilot, departTimestamp, returnTimestamp));

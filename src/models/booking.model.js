@@ -52,7 +52,17 @@ BookingSchema.statics = {
       depDateTime: { $gte: departDateTime },
       returnDateTime: { $lte: returnDateTime }
     }).populate('Pilot');
-  }
+  },
+
+  async isAlreadyBooked(pilot, departDateTime, returnDateTime) {
+    const pilotBookings = await this.find({
+      pilot: pilot._id,
+      depDateTime: { $gte: departDateTime },
+      returnDateTime: { $lte: returnDateTime }
+    }).populate('Pilot');
+
+    return pilotBookings.length > 0;
+  },
 };
 
 BookingSchema.methods = {

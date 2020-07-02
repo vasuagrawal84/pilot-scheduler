@@ -16,7 +16,7 @@ With Homebrew you can just run `brew tap mongodb/brew`, then `brew install mongo
 
 ---
 
-## Next Steps to improve project
+## Next steps to improve project
 
 - Add more unit tests (currently only two controllers have been unit tested)
 - Send server logs to analytics tools such as Sentry (Raven logs has easy integration), Mixpanel / Amplitude etc.
@@ -97,6 +97,7 @@ Monitoring Server on `http://localhost:3000/status`
 - [MongoDB](https://www.mongodb.com/)
 - [Mongoose](http://mongoosejs.com/)
 - [Webpack3](https://webpack.js.org/)
+- [PM2](https://pm2.keymetrics.io/)
 
 ---
 

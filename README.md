@@ -8,6 +8,7 @@ This project provides an API of a on-demand pilot scheduling system using Node.j
 2. Install dependencies `yarn install` or `npm i`
 3. Create a `.env` file in the root like the `.env.example` file.
 4. For dev you need to have mongodb db locally.
+5. Seed the database with some pilot data (See below)
 ---
 
 ## Install Mongodb
@@ -24,7 +25,8 @@ With Homebrew you can just run `brew tap mongodb/brew`, then `brew install mongo
 - Add docker integration
 - Add code coverage tool e.g. istanbul
 - Add client validation - token based, whitelisting domains etc.
-- Add more API docs
+- Improve API docs
+- Add integration/E2E tests
 - Add more business logic to give pilots breaks between flights
 
 ---
@@ -72,6 +74,14 @@ npm run test
 
 ---
 
+## API Documentation
+
+`apidoc` has been used to generate documentation for the API of this Node/Express server
+
+You can run `npm run doc` to generate the docs in the `doc` folder. Open `index.html` in a browser to view.
+
+---
+
 ## Seeds
 
 For seeding the database with the pilots, just run one of these following comands. 
@@ -92,14 +102,14 @@ Monitoring Server on `http://localhost:3000/status`
 ## Techs
 
 - Node Express middlewares - [http://expressjs.com/en/resources/middleware.html](http://expressjs.com/en/resources/middleware.html)
-- [Jest](https://jestjs.io/)
-- [NPS](https://github.com/kentcdodds/nps)
-- [MongoDB](https://www.mongodb.com/)
-- [Mongoose](http://mongoosejs.com/)
-- [Webpack3](https://webpack.js.org/)
-- [PM2](https://pm2.keymetrics.io/)
+- [Jest](https://jestjs.io/) - unit testing
+- [NPS](https://github.com/kentcdodds/nps) - cleaner package.json by extracting scripts
+- [MongoDB](https://www.mongodb.com/) - NoSQL database 
+- [Mongoose](http://mongoosejs.com/) - object modelling for MongoDB
+- [Webpack3](https://webpack.js.org/) - module bundler
+- [PM2](https://pm2.keymetrics.io/) - production process manager for Node.js
 
 ---
 
 ## Notes
-- The two helper files in the src/services folder were copied over from an older project to save time
+- The two helper files in the `src/services` folder were copied over from an older project to save time

@@ -1,6 +1,6 @@
 # Pilot Scheduler
 
-This project provides an API of a on-demand pilot scheduling system
+This project provides an API of a on-demand pilot scheduling system using Node.js, Express.js and MongoDB
 
 ## Installation
 
@@ -16,8 +16,9 @@ With Homebrew you can just run `brew tap mongodb/brew`, then `brew install mongo
 
 ---
 
-## Next Steps
+## Next Steps to improve project
 
+- Add more unit tests (currently only two controllers have been unit tested)
 - Send server logs to analytics tools such as Sentry (Raven logs has easy integration), Mixpanel / Amplitude etc.
 - Add typescript
 - Add docker integration
@@ -58,21 +59,31 @@ npm run build
 npm run dev:debug
 ```
 
+### Unit tests
+```
+yarn test
+```
+
+or
+
+```
+npm run test
+```
+
 ---
 
 ## Seeds
 
-For seed just run one of these following comands
+For seeding the database with the pilots, just run one of these following comands. 
 
-**This is only available in dev environment**
-
-*You can change the number of seed by changing the number in each script inside `/scripts/seeds`*
+**You will need to do this before making any requests to the pilot availability or create flight booking APIs**
 
 - Seeds pilots in the Crew.json `yarn db:seeds-pilot`
 - Clear pilot collection `yarn db:seeds-clear-pilot`
 - Clear all collections `yarn db:seeds-clear`
 
 ---
+## Monitoring
 
 Monitoring Server on `http://localhost:3000/status`
 
@@ -81,6 +92,7 @@ Monitoring Server on `http://localhost:3000/status`
 ## Techs
 
 - Node Express middlewares - [http://expressjs.com/en/resources/middleware.html](http://expressjs.com/en/resources/middleware.html)
+- [Jest](https://jestjs.io/)
 - [NPS](https://github.com/kentcdodds/nps)
 - [MongoDB](https://www.mongodb.com/)
 - [Mongoose](http://mongoosejs.com/)
@@ -89,4 +101,4 @@ Monitoring Server on `http://localhost:3000/status`
 ---
 
 ## Notes
-- Files in the src/services folder were copied over from an older project to save time
+- The two helper files in the src/services folder were copied over from an older project to save time

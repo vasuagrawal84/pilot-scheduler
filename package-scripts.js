@@ -56,8 +56,8 @@ module.exports = {
       seedsClear: 'bash ./scripts/seeds/clearAll.seed.sh',
     },
     test: {
-      default: `${crossEnv('NODE_ENV=test')} mocha $(find __tests__ -name *.test.js) --colors --require babel-core/register`,
-      watch: series.nps('test -w'),
+      default: `jest --config ./jest.config.json`,
+      watch: 'npm run test -- --watch'
     },
     validate: {
       description: 'Validate code by linting, type-checking.',

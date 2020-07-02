@@ -47,7 +47,7 @@ BookingSchema.statics = {
     }
   },
 
-  async getBookingsBetweenAt(location, departDateTime, returnDateTime) {
+  async getBookingsBetween(departDateTime, returnDateTime) {
     return this.find({
       depDateTime: { $gte: departDateTime },
       returnDateTime: { $lte: returnDateTime }

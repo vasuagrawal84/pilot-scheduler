@@ -23,14 +23,15 @@ export const validation = {
 };
 
 export const create = async (req, res, next) => {
-  const { ID, Name, Base, WorkDays } = req.body;
+  try {
+    const { ID, Name, Base, WorkDays } = req.body;
 
-  Pilot.createPilot(ID, Name, Base, WorkDays).then(() => {
+    await Pilot.createPilot(ID, Name, Base, WorkDays);
     return res.status(HTTPStatus.CREATED).send();
-  }).catch((e) => {
+  } catch (e) {
     e.status = HTTPStatus.BAD_REQUEST;
     return next(e);
-  });
+  };
 }
 
 export const getAvailability = async (req, res, next) => {
@@ -45,18 +46,17 @@ export const getAvailability = async (req, res, next) => {
       throw Error('Availability checks must be for the future')
     }
 
-    const bookingsList = await Booking.getBookingsBetweenAt(location, departureTimestamp, returnTimestamp);
+    const bookingsList = await Booking.getBookingsBetween(departureTimestamp, returnTimestamp);
 
     const bookedPilotIds = bookingsList.map((booking) => {
       return booking.pilot;
     });
 
     const weekdayOfFlight = moment(depDateTime).format('dddd');
-    console.warn('!!', weekdayOfFlight)
     const pilotsList = await Pilot.getPilotsForBase(location, bookedPilotIds, weekdayOfFlight);
 
     return res.status(HTTPStatus.OK).send({
-      pilotId: pilotsList[0]
+      pilot: pilotsList[0]
     });
   } catch (e) {
     e.status = HTTPStatus.BAD_REQUEST;

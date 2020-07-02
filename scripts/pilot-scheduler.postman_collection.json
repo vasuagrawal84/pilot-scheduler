@@ -1,0 +1,115 @@
+{
+	"info": {
+		"_postman_id": "76cc3a48-126c-44cb-9cc1-e8ff6fc339be",
+		"name": "pilot-scheduler",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CREATE PILOT",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"ID\": 9,\n    \"Name\": \"TestUser\",\n    \"Base\": \"Munich\",\n    \"WorkDays\": [\n        \"Monday\",\n        \"Tuesday\",\n        \"Thursday\",\n        \"Saturday\"\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/pilot",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"pilot"
+					]
+				},
+				"description": "Shouldn't need this as user seeding is done via npm commands"
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE BOOKING",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"pilotId\": 8,\n    \"depDateTime\": \"2021-05-30T09:00:00\",\n    \"returnDateTime\": \"2021-05-30T11:00:00Z\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/booking",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"booking"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET AVAILABLE PILOT",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/pilot/availability?location=Berlin&depDateTime=2021-05-23T09:00:00&returnDateTime=2021-05-23T11:00:00Z",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"pilot",
+						"availability"
+					],
+					"query": [
+						{
+							"key": "location",
+							"value": "Berlin"
+						},
+						{
+							"key": "depDateTime",
+							"value": "2021-05-23T09:00:00"
+						},
+						{
+							"key": "returnDateTime",
+							"value": "2021-05-23T11:00:00Z"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

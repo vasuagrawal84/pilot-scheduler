@@ -17,6 +17,12 @@ With Homebrew you can just run `brew tap mongodb/brew`, then `brew install mongo
 
 ---
 
+## Manually test API
+
+Once set up has completed, the server is running and connected to the database, you can use the included Postman collection to test the API. The Postman collection is located in `scripts/pilot-scheduler.postman_collection.json`.
+
+---
+
 ## Next steps to improve project
 
 - Add more unit tests (currently only two controllers have been unit tested)
